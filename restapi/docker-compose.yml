@@ -1,0 +1,22 @@
+services:
+  dosen_service:
+    build:
+      context: ./dosen_service
+    ports:
+      - "3000:3000"  # Port untuk Dosen Service
+    depends_on:
+      - rabbitmq
+
+  mahasiswa_service:
+    build:
+      context: ./mahasiswa_service
+    ports:
+      - "4000:4000"  # Port untuk Mahasiswa Service
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"  # Port untuk RabbitMQ
+      - "15672:15672"  # Port untuk RabbitMQ Management UI
